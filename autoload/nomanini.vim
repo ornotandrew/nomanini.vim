@@ -1,7 +1,7 @@
 " Helper functions to parse paths
 function! nomanini#is_nomanini_repo(path)
     let l:dirs = split(fnamemodify(expand(a:path), ':p'), '/')
-    return index(dirs, g:nomanini#repo_name) != -1
+    return index(dirs, g:nomanini_repo_name) != -1
 endfunction
 
 function! nomanini#get_single_path(path)
@@ -26,18 +26,18 @@ function! nomanini#get_module_yaml(path)
 endfunction
 
 function! nomanini#set_makeprg()
-	if exists('g:nomanini#nose_path') && exists('g:nomanini#gae_path')
-        exec 'setlocal makeprg='.expand(g:nomanini#nose_path).
+	if exists('g:nomanini_nose_path') && exists('g:nomanini_gae_path')
+        exec 'setlocal makeprg='.expand(g:nomanini_nose_path).
              \'\ -v\ tests/functional/'.nomanini#get_single_path('%').
              \'\ -w\ '.nomanini#get_module_path('%').
              \'\ --logging-filter=-root'.
-             \'\ --processes='.g:nomanini#nose_processes.
-             \'\ --process-timeout='.g:nomanini#nose_process_timeout.
+             \'\ --processes='.g:nomanini_nose_processes.
+             \'\ --process-timeout='.g:nomanini_nose_process_timeout.
              \'\ --with-gae'.
-             \'\ --gae-lib-root='.g:nomanini#gae_path.
+             \'\ --gae-lib-root='.g:nomanini_gae_path.
              \'\ --gae-application='.nomanini#get_module_yaml('%')
     else
-        echom 'You need to define g:nomanini#nose_path and g:nomanini#gae_path'
+        echo 'You need to define g:nomanini_nose_path and g:nomanini_gae_path'
     endif
 endfunction
 
