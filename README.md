@@ -5,8 +5,8 @@ This is a thin wrapper around the makefile, and simply sets up the correct argum
 # Usage
 Run one of the following
 
-`:TestSingle` - Run a single test
-`:TestModule` - Run tests for the entire module that the current file belongs to
+`:TestSingle` - Run a single test  
+`:TestModule` - Run tests for the entire module that the current file belongs to  
 `:Test` - Run all the tests for all modules
 
 # Configuration
