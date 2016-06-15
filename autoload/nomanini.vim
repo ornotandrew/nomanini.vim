@@ -4,6 +4,12 @@ function! nomanini#is_nomanini_repo(path)
     return index(dirs, g:nomanini_repo_name) != -1
 endfunction
 
+function! nomanini#get_repo_root(path)
+    let l:dirs = split(fnamemodify(expand(a:path), ':p'), '/')
+    let l:repo_index = index(dirs, g:nomanini_repo_name)
+    return '/'.join(dirs[:l:repo_index], '/')
+endfunction
+
 function! nomanini#get_single_path(path)
     let l:dirs = split(expand(a:path), '/')
     let l:func_index = index(dirs, 'functional')
@@ -41,11 +47,14 @@ function! nomanini#test(type)
         if exists('g:nomanini_nose_path') && exists('g:nomanini_gae_path')
             let l:old_makeprg = &makeprg
             let l:old_efm = &errorformat
+            let l:old_cwd = getcwd()
             call nomanini#set_makeprg(a:type)
             call nomanini#set_errorformat()
+            execute 'cd ' nomanini#get_repo_root('%')
             execute g:nomanini_make_command
             let &makeprg = l:old_makeprg
             let &errorformat = l:old_efm
+            execute 'cd ' l:old_cwd
         else
             echom 'You need to define g:nomanini_nose_path and g:nomanini_gae_path'
         endif
