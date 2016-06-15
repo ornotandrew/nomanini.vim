@@ -4,7 +4,7 @@ if exists("g:loaded_nomanini")
 endif
 let g:loaded_nomanini = 1
 
-" Globals that should be overridden
+" Globals that need to be set
 " g:nomanini_nose_path
 " g:nomanini_gae_path
 
@@ -23,4 +23,6 @@ if !exists('g:nomanini_make_command')
 endif
 
 " Commands
-command TestSingle silent execute g:nomanini_make_command
+command Test call nomanini#test('all')
+command TestModule call nomanini#test('module')
+command TestSingle call nomanini#test('single')
