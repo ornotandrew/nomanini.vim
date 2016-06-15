@@ -44,20 +44,16 @@ endfunction
 
 function! nomanini#test(type)
     if nomanini#is_nomanini_repo('%')
-        if exists('g:nomanini_nose_path') && exists('g:nomanini_gae_path')
-            let l:old_makeprg = &makeprg
-            let l:old_efm = &errorformat
-            let l:old_cwd = getcwd()
-            call nomanini#set_makeprg(a:type)
-            call nomanini#set_errorformat()
-            execute 'cd ' nomanini#get_repo_root('%')
-            execute g:nomanini_make_command
-            let &makeprg = l:old_makeprg
-            let &errorformat = l:old_efm
-            execute 'cd ' l:old_cwd
-        else
-            echom 'You need to define g:nomanini_nose_path and g:nomanini_gae_path'
-        endif
+        let l:old_makeprg = &makeprg
+        let l:old_efm = &errorformat
+        let l:old_cwd = getcwd()
+        call nomanini#set_makeprg(a:type)
+        call nomanini#set_errorformat()
+        execute 'cd ' nomanini#get_repo_root('%')
+        execute g:nomanini_make_command
+        let &makeprg = l:old_makeprg
+        let &errorformat = l:old_efm
+        execute 'cd ' l:old_cwd
     else
         echom 'You are not in the nomanini repo'
     endif
