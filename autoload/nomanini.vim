@@ -34,12 +34,12 @@ function! nomanini#set_makeprg(type)
     elseif a:type ==# 'module'
         let l:make_string .= ' '.nomanini#get_module('%')
     endif
-    let l:make_string .= ' EXTRA_NOSE_ARGS='
+    let l:make_string .= ' EXTRA_NOSE_ARGS=--with-machineout'
     let &makeprg = l:make_string
 endfunction
 
 function! nomanini#set_errorformat()
-    let &errorformat = '%C %.%#,%A  File "%f"\, line %l%.%#,%Z%[%^ ]%\@=%m'
+    let &errorformat = '%f:%l: fail: %m,%f:%l: error: %m'
 endfunction
 
 function! nomanini#test(type)

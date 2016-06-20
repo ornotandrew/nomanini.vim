@@ -2,6 +2,14 @@
 This plugin sets up `makeprg` and `errorformat` for running nosetests on the nomanini codebase.  
 This is a thin wrapper around the makefile, and simply sets up the correct arguments and variables.
 
+# Installation
+First, install [nose machineout](https://github.com/lambdalisue/nose_machineout2)
+```
+pip install nose-machineout2
+```
+then, install this plugin with the plugin manager of your choice
+
+
 # Usage
 Run one of the following
 
